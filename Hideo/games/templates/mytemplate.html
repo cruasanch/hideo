@@ -1,0 +1,28 @@
+{% extends 'maintemplate.html' %}
+{% load staticfiles %}
+
+{% block mytemplate %}
+    {% for con in content %}
+    <iframe width="853" height="480" src={{ con.0.Video_url }} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <a href="/games/showOne/{{ con.0.id }}"><H1>{{ con.0.Video_name }}</H1></a>
+    <h2>{{ con.0.Video_dis }}</h2>
+    <h5>Дата добавления - {{ con.0.Video_date }}</h5>
+    <hr>
+    <img src="{% static 'Like.jpg' %}" align="left" width="100px" id="like" name="{{ con.0.id }}"> <h3 id="count_likes"> {{ con.0.Video_likes }}</h3>
+    <hr>
+
+    <h2>Комментарии:</h2>
+    <hr>
+        {% for com in con.1 %}
+            <i>
+                <h3><b>{{ com.0.Comment_text }}</b></h3>
+            <h5>Дата добавления - {{ com.0.Comment_data }}</h5>
+                <img src="{% static 'Like.jpg' %}" align="left" width="100px" id="like1" name="{{ com.0.id }}"> <h3 id="count_likes1"> {{ com.0.Comment_likes }}</h3>
+                <hr>
+                <h3>Комментарий оставил - <b>{{ com.1 }}</b></h3>
+            <hr>
+            </i>
+        {% endfor %}
+    <hr>
+    {% endfor %}
+{% endblock %}

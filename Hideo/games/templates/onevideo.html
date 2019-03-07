@@ -1,0 +1,38 @@
+{% extends 'maintemplate.html' %}
+
+{% load staticfiles %}
+
+{% block OneVideo %}
+
+ <iframe width="853" height="480" src={{ video.Video_url }} frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<H1><b>{{ video.Video_name }}</b></H1>
+    <h2>{{ video.Video_dis }}</h2>
+    <h5>Дата добавления - {{ video.Video_date }}</h5><hr>
+    <img src="{% static 'Like.jpg' %}" align="left" width="100px" id="like" name="{{ video.id }}"> <h3 id="count_likes"> {{ video.Video_likes }}</h3>
+    <hr>
+    <h2>Комментарии:</h2>
+    <hr>
+        {% for com in comments %}
+            <i>
+                <h2><b>{{ com.0.Comment_text }}</b></h2>
+            <h5>Дата добавления - {{ com.0.Comment_data }}</h5>
+                <img src="{% static 'Like.jpg' %}" align="left" width="100px" id="like1" name="{{ com.0.id }}"> <h3 id="count_likes1"> {{ com.0.Comment_likes }}</h3>
+                <hr>
+                <h3>Комментарий оставил - <b>{{ com.1 }}</b></h3>
+            </i>
+            <hr>
+        {% endfor %}
+    <hr>
+
+<h2>
+        {% if user %}
+		<form action="/games/addcomment/{{video.id}}/" method = "post"> {% csrf_token %}{{ form }}
+            <input type="submit" class="button"  value="Добавить коментарий">
+            <input type="password" value="passworld" name="id_password">
+        </form>
+        {% else %}
+    <h3>Войдите чтобы оставить комментарий</h3>
+        {% endif %}
+</h2>
+
+{% endblock %}

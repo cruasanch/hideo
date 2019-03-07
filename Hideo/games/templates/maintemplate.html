@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="{% static 'script.js' %}"></script>
+    <script type="text/javascript" src="{% static 'script1.js' %}"></script>
+
+</head>
+<body>
+{% if user %}
+<h4> Приветствуем, <b>{{ user }}</b></h4>
+    <a href="/games/out/">Выйти</a><br>
+{% else %}
+    <a href="/games/sign/">Регистрация</a>
+    <a href="/games/in/">Войти</a><br>
+{% endif %}
+
+
+<div class = "container">
+{% block OneVideo %}{% endblock %}
+{% block mytemplate %}{% endblock %}
+{% block sign %}{% endblock %}
+</div>
+
+</body>
+</html>
